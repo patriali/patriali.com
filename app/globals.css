@@ -46,12 +46,14 @@ body {
 
 .page {
   min-height: 100dvh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 24px;
 }
 
 .card {
+  margin: auto;
   width: 100%;
   max-width: 420px;
   background: var(--card);
@@ -129,6 +131,86 @@ body {
   min-width: 0;
 }
 
+/* ── Expandable Domain Portfolio group ───────────────────────── */
+/* One pill that grows: the trigger and the revealed marketplaces share a
+ * single rounded border, so it reads as the portfolio pill expanding —
+ * not three new pills appearing below it. */
+.group {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+.group.is-open {
+  border-color: var(--border-hover);
+}
+
+.group-trigger {
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--muted);
+  /* Apple-style ease: slow-in, fast settle. */
+  transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.group.is-open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Real height animation via grid rows collapsing to 0fr — no magic
+ * max-height guesswork, so it stays smooth at any content length. */
+.group-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.42s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.group.is-open .group-panel {
+  grid-template-rows: 1fr;
+}
+
+.group-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* Rows live inside the shared pill: no border/radius of their own, just a
+ * hairline divider from the row above. */
+.sub-link {
+  border: none;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.28s ease,
+    transform 0.36s cubic-bezier(0.32, 0.72, 0, 1), background 0.15s ease;
+}
+
+.group.is-open .sub-link {
+  opacity: 1;
+  transform: translateY(0);
+  /* Gentle stagger on the way open; instant on close for a snappy collapse. */
+  transition-delay: calc(var(--i) * 0.05s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron,
+  .group-panel,
+  .sub-link {
+    transition: none;
+  }
+}
+
 .link-icon {
   flex-shrink: 0;
   width: 24px;
@@ -183,4 +265,36 @@ body {
 .contact a:hover {
   color: var(--text);
   text-decoration: underline;
+}
+
+.views {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+}
+
+/* ── Discreet "powered by" credit, below the view counter ────── */
+.powered-by {
+  margin-top: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.powered-by:hover {
+  opacity: 1;
+  color: var(--text);
+}
+
+.powered-by__logo {
+  width: 15px;
+  height: 15px;
+  object-fit: contain;
 }

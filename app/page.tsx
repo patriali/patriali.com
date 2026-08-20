@@ -1,12 +1,38 @@
 // ─────────────────────────────────────────────────────────────
 // EDIT ME: your contact info and links live here.
 // ─────────────────────────────────────────────────────────────
+import ViewCounter from "./ViewCounter";
+import PortfolioGroup from "./PortfolioGroup";
+
 const PROFILE = {
   name: "Danilo Patriali",
   tagline: "patriali.com",
   email: "contact@patriali.com",
   avatar: "/logos/apollo11.png",
 };
+
+// The three marketplaces where the domain portfolio lives. These collapse
+// into a single expandable "Domain Portfolio" row (see PortfolioGroup).
+const PORTFOLIO = [
+  {
+    label: "Atom",
+    description: "My domains on Atom",
+    href: "https://atom.patriali.com",
+    icon: "/logos/atom.png",
+  },
+  {
+    label: "Spaceship",
+    description: "My domains on Spaceship",
+    href: "https://spaceship.patriali.com",
+    icon: "/logos/spaceship.png",
+  },
+  {
+    label: "Afternic",
+    description: "My domains on Afternic",
+    href: "https://afternic.patriali.com",
+    icon: "/logos/afternic.png",
+  },
+];
 
 const LINKS: {
   label: string;
@@ -16,12 +42,6 @@ const LINKS: {
   mono?: boolean; // black logo → inverted to white in dark mode
   comingSoon?: boolean;
 }[] = [
-  {
-    label: "Domain Portfolio",
-    description: "Domains I own",
-    href: "https://domains.patriali.com",
-    icon: "/logos/atom.png",
-  },
   {
     label: "GitHub",
     description: "Code & projects",
@@ -67,6 +87,11 @@ export default function Home() {
         </header>
 
         <nav className="links">
+          <PortfolioGroup
+            label="Domain Portfolio"
+            description="Domains I own"
+            subLinks={PORTFOLIO}
+          />
           {LINKS.map((link) =>
             link.comingSoon ? (
               <span key={link.label} className="link is-disabled">
@@ -116,6 +141,24 @@ export default function Home() {
           <a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a>
         </footer>
       </section>
+
+      <ViewCounter />
+
+      <a
+        className="powered-by"
+        href="https://www.atom.com"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Landers powered by
+        <img
+          src="/logos/atom.png"
+          alt=""
+          className="powered-by__logo"
+          aria-hidden
+        />
+        Atom.com
+      </a>
     </main>
   );
 }
