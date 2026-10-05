@@ -57,12 +57,10 @@ const LINKS: {
     mono: true,
   },
   {
-    label: "Arch Dotfiles",
-    description: "My Arch Linux setup",
-    href: "#",
-    icon: "/logos/arch.png",
-    mono: true,
-    comingSoon: true,
+    label: "Extend.Domains",
+    description: "Domain lookups in your browser",
+    href: "https://extend.domains",
+    icon: "/logos/extend-domains.png",
   },
 ];
 // ─────────────────────────────────────────────────────────────
@@ -143,22 +141,6 @@ export default function Home() {
       </section>
 
       <ViewCounter />
-
-      <a
-        className="powered-by"
-        href="https://www.atom.com"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Landers powered by
-        <img
-          src="/logos/atom.png"
-          alt=""
-          className="powered-by__logo"
-          aria-hidden
-        />
-        Atom.com
-      </a>
     </main>
   );
 }
