@@ -5,7 +5,7 @@ import ViewCounter from "./ViewCounter";
 import PortfolioGroup from "./PortfolioGroup";
 
 const PROFILE = {
-  name: "Danilo Patriali",
+  name: "Dan Patriali",
   tagline: "patriali.com",
   email: "contact@patriali.com",
   avatar: "/logos/apollo11.png",

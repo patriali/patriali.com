@@ -3,8 +3,8 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Danilo Patriali",
-  description: "Contact info and links for Danilo Patriali.",
+  title: "Dan Patriali",
+  description: "Links and Projects",
 };
 
 export default function RootLayout({
